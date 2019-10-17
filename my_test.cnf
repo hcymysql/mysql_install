@@ -1,0 +1,186 @@
+[client]
+port		=  3306
+socket   =  /tmp/mysql_test.sock
+#default-character-set = utf8 
+prompt=(\\u@\\h) [\\d]>\\_
+
+# The MySQL server
+#########Basic##################
+[mysqld]
+##bind_address = 127.0.0.1
+server-id	=  413306
+port	        =  3306
+user            =  mysql
+basedir		=  /usr/local/mysql
+datadir		=  /data/mysql/test/data
+tmpdir		=  /data/mysql/test/tmp
+socket		=  /tmp/mysql_test.sock
+skip-external-locking
+skip-name-resolve
+##init_connect = 'SET global sql_mode = ""'
+sql_mode = ''
+default_authentication_plugin = mysql_native_password
+
+### Percona ###
+#extra_port = 13306
+#extra_max_connections = 100
+
+###skip-networking
+default-storage-engine = INNODB
+character-set-server = utf8
+wait_timeout  =  3600
+connect_timeout  =  20
+interactive_timeout  =  3600
+back_log  =  500
+#event_scheduler  =  ON
+open_files_limit = 65535
+#thread_handling  =  pool-of-threads
+
+lower_case_table_names  =  1
+
+###### binlog ######
+log-bin  =  /data/mysql/test/binlog/mysql-bin
+binlog_format = ROW
+binlog_checksum = NONE
+sync_binlog      =   1
+gtid_mode = on
+enforce_gtid_consistency = on
+log_slave_updates   =  1
+master_info_repository = TABLE
+relay_log_info_repository = TABLE
+max_binlog_size  =  128M
+binlog_cache_size  =  1M
+expire-logs-days  =  7
+
+#########replication#############
+relay-log               =  /data/mysql/test/relaylog/relay-log
+slave-net-timeout                   =  10
+#rpl_semi_sync_master_enabled        =  1
+#rpl_semi_sync_master_wait_no_slave   =  1
+#rpl_semi_sync_master_timeout        =  1000
+#rpl_semi_sync_slave_enabled         =  1
+#skip-slave-start
+log_slave_updates                  =  1
+relay_log_recovery                 =  1
+#slave_skip_errors = 1062
+read_only                          =  0
+
+###### Mgr config ######
+loose-transaction_write_set_extraction = XXHASH64
+loose-group_replication_start_on_boot = ON ###是否随mysql启动Group Replication
+loose-group_replication_bootstrap_group = OFF  ###是否是Group Replication的引导节点，初次搭建集群的时候需要有一个节点设置为ON来启动Group Replication
+					       ###参数设置为ON，是为了标示以后加入集群的服务器都已这台服务器为基准。以后加入的就不需要进行设置
+					    
+loose-group_replication_group_name = 850ce522-a85e-11e9-8ea3-48df3749e199				  
+loose-group_replication_local_address = 192.168.148.41:33061					       
+loose-group_replication_group_seeds = 192.168.148.41:33061,192.168.148.42:33072,192.168.148.39:33083					       
+loose-group_replication_single_primary_mode = ON					      
+
+###MHA ############
+relay_log_purge            =  1
+###################
+
+###parallel replication####
+slave_parallel_type = LOGICAL_CLOCK
+slave_parallel_workers = 24
+slave_preserve_commit_order = ON
+##################################
+
+#########slow log#############
+slow_query_log  =  1
+slow_query_log_file  =  /data/mysql/test/log/mysql-slow.log
+#log-slow-verbosity = query_plan,explain
+long_query_time  =  5
+
+#########error log#############
+log-error   =  /data/mysql/test/log/error.log
+log_timestamps = system
+ 
+#######per_thread_buffers############
+max_connections=4100
+max_user_connections=4000
+max_connect_errors=100000000
+max_allowed_packet = 256M
+table_open_cache = 6144
+table_definition_cache = 4096
+sort_buffer_size = 128K
+read_buffer_size = 128K
+read_rnd_buffer_size = 128k
+join_buffer_size = 128K
+tmp_table_size = 64M
+max_heap_table_size = 64M
+bulk_insert_buffer_size = 32M
+thread_cache_size = 64
+#thread_concurrency = 32
+thread_stack = 256K
+
+##MyISAM## 
+key_buffer_size = 64M
+myisam_sort_buffer_size = 8M
+concurrent_insert=2
+low_priority_updates=1
+myisam_recover_options=BACKUP,FORCE
+
+######### InnoDB #############
+innodb_numa_interleave = 1
+innodb_sort_buffer_size = 32M
+innodb_rollback_on_timeout = 1
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_buffer_pool_dump_at_shutdown = 1
+innodb_buffer_pool_load_at_startup = 1
+innodb_buffer_pool_size = 1G
+innodb_buffer_pool_instances	= 16
+innodb_log_file_size = 512M
+innodb_log_buffer_size = 64M
+innodb_log_files_in_group = 3
+innodb_flush_log_at_trx_commit = 2
+innodb_lock_wait_timeout = 10
+innodb_sync_spin_loops = 40
+innodb_max_dirty_pages_pct = 95
+innodb_thread_concurrency = 0
+innodb_thread_sleep_delay = 500
+innodb_concurrency_tickets = 1000
+log_bin_trust_function_creators = 1
+innodb_flush_method = O_DIRECT
+innodb_file_per_table = 1
+innodb_read_io_threads = 16
+innodb_write_io_threads = 16
+innodb_io_capacity = 800
+innodb_purge_threads = 16
+innodb_purge_batch_size = 32
+innodb_old_blocks_time = 1000
+innodb_change_buffering = all
+transaction_isolation = READ-COMMITTED
+innodb_stats_on_metadata = 0
+
+####### NEW ########
+##innodb_kill_idle_transaction = 5
+
+###### SSD #########
+#innodb_flush_neighbors = 0
+#innodb_log_block_size = 4096
+####################
+
+[mysqldump]
+quick
+max_allowed_packet = 128M
+
+[mysql]
+no-auto-rehash
+#prompt=(\\u@\\h) [\\d]>\\_
+prompt=(\\u@\\h) [\\d]>\\_
+
+[myisamchk]
+key_buffer_size = 64M
+sort_buffer_size = 256k
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+interactive-timeout
+
+[mysqld_safe]
+open-files-limit = 65535
+#flush_caches = 1
+#numa_interleave = 1
+malloc-lib = /usr/lib64/libjemalloc.so
