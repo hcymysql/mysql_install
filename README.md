@@ -20,3 +20,5 @@ mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
 3）配置组复制（先在Primary节点上执行，再到Secondary节点上执行）
 
 #/bin/bash mysql8_install mgr
+
+![image](https://raw.githubusercontent.com/hcymysql/mysql_install/master/mgr.png)
