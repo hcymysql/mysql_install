@@ -9,6 +9,28 @@ sleep 2
 mysql8_version=mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
 mysql8_version_dir=mysql-8.0.18-linux-glibc2.12-x86_64
 
+cat << EOF >> /etc/hosts
+
+192.168.137.11		mgr1
+192.168.137.12		mgr2
+192.168.137.13		mgr3
+
+EOF
+
+
+######mgr配置######
+mysql_port=3306
+master_ip=192.168.137.11
+secondary1_ip=192.168.137.12
+secondary2_ip=192.168.137.13
+
+master_port=33061
+secondary1_port=33062
+secondary2_port=33063
+
+local_ip=192.168.137.11
+local_port=33061
+
 ###############################################
 if [ "$1" = "repl" ]
 then
@@ -32,6 +54,42 @@ done
 	echo "MySQL主从复制同步已经初始化完毕。"
 	exit 0
 fi
+
+################################################
+if [ "$1" = "mgr" ]
+then
+
+while true
+do
+	read -t 30 -p "是Primary吗？是请输入yes，否输入no:  " is_primary
+	if [[ -z $is_primary ]]
+	then
+		continue
+	else
+		if [ $is_primary == "yes" ] || [ $is_primary == "no" ]
+		then
+			break 
+		else
+			 echo "你输入一个错误的字符$is_primary，请重新输入..."
+			 continue
+		fi
+	fi
+done
+
+if [ $is_primary == "yes" ]
+then
+	/usr/local/mysql/bin/mysql -h127.0.0.1 -u'admin' -p'hechunyang' -P"$mysql_port" --connect-expired-password -e "INSTALL PLUGIN group_replication SONAME  'group_replication.so'; set persist group_replication_group_name = '3b12b5bd-f0c6-11e9-9778-000c2900afc6';set global group_replication_local_address =  '${local_ip}:${local_port}'; set persist group_replication_group_seeds = '${master_ip}:${master_port},${secondary1_ip}:${secondary1_port},${secondary2_ip}:${secondary2_port}';SET GLOBAL group_replication_bootstrap_group=ON; CHANGE MASTER TO MASTER_USER='repl',MASTER_PASSWORD='sysrepl' FOR CHANNEL 'group_replication_recovery';START GROUP_REPLICATION;select sleep(5);select * from performance_schema.replication_group_members;SET GLOBAL group_replication_bootstrap_group=OFF;"
+
+else
+	/usr/local/mysql/bin/mysql -h127.0.0.1 -u'admin' -p'hechunyang' -P"$mysql_port" --connect-expired-password -e "INSTALL PLUGIN group_replication SONAME  'group_replication.so'; set persist group_replication_group_name = '3b12b5bd-f0c6-11e9-9778-000c2900afc6';set global group_replication_local_address =  '${local_ip}:${local_port}'; set persist group_replication_group_seeds = '${master_ip}:${master_port},${secondary1_ip}:${secondary1_port},${secondary2_ip}:${secondary2_port}'; SET GLOBAL group_replication_bootstrap_group=OFF; CHANGE MASTER TO MASTER_USER='repl',MASTER_PASSWORD='sysrepl' FOR CHANNEL 'group_replication_recovery';START GROUP_REPLICATION;select sleep(5);select * from performance_schema.replication_group_members;"; 
+
+fi
+	
+echo "MySQL Mgr组复制已经初始化完毕。"
+exit 0
+
+fi
+
 ################################################
 
 ps aux | grep 'mysql' | grep -v 'grep' | grep -v 'bash'
