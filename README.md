@@ -18,6 +18,7 @@ mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
 #/bin/bash mysql8_install repl
 
 3）配置组复制（先在Primary节点上执行，再到Secondary节点上执行）
+注：先把3个节点MySQL实例启动后再开始搭建mgr，同时修改脚本里的ip地址和端口和hosts对应的主机名和地址
 
 #/bin/bash mysql8_install mgr
 
