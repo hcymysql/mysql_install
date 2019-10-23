@@ -182,4 +182,10 @@ source /root/.bash_profile
 
 echo "MySQL账号初始化完毕。"
 
+###安装clone插件
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock --connect-expired-password -p'123456' -e "set sql_log_bin=0;INSTALL PLUGIN CLONE SONAME 'mysql_clone.so'; CREATE USER 'clone_user'@'%' IDENTIFIED BY '123456';GRANT BACKUP_ADMIN,CLONE_ADMIN ON *.* TO 'clone_user'@'%';"
+
+echo ""
+echo "clone克隆插件安装完毕。"
+
 
