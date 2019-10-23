@@ -101,7 +101,7 @@ fi
 
 if [ ! -d /usr/local/${mysql8_version_dir} ]
 then
-    yum install xz -y
+        yum install xz -y
 	tar -Jxvf ${mysql8_version} -C /usr/local/
 	ln -s /usr/local/${mysql8_version_dir} /usr/local/mysql
 	chown -R mysql.mysql /usr/local/mysql/
