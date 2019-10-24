@@ -24,3 +24,5 @@ mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
 #/bin/bash mysql8_install mgr
 
 ![image](https://raw.githubusercontent.com/hcymysql/mysql_install/master/mgr.png)
+
+注：配置成功后，会在data数据目录下生成mysqld-auto.cnf配置文件。
