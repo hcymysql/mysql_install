@@ -13,6 +13,8 @@ mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
 
 #/bin/bash mysql8_install.sh
 
+注：my.cnf配置文件默认在/etc/目录下，文件名是以你的数据库名命名，例my_test.cnf，mysql.sock在/tmp目录下。
+
 2）配置主从复制（从库执行）
 
 #/bin/bash mysql8_install repl
