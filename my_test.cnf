@@ -74,7 +74,9 @@ loose-group_replication_bootstrap_group = OFF  ###是否是Group Replication的�
 loose-group_replication_group_name = 850ce522-a85e-11e9-8ea3-48df3749e199				  
 loose-group_replication_local_address = 192.168.148.41:33061					       
 loose-group_replication_group_seeds = 192.168.148.41:33061,192.168.148.42:33072,192.168.148.39:33083					       
-loose-group_replication_single_primary_mode = ON					      
+loose-group_replication_single_primary_mode = ON	
+loose-group_replication_exit_state_action = OFFLINE_MODE
+offline_mode = ON
 
 ###MHA ############
 relay_log_purge            =  1
