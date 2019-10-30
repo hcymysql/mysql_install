@@ -72,8 +72,8 @@ loose-group_replication_bootstrap_group = OFF  ###是否是Group Replication的�
 					       ###参数设置为ON，是为了标示以后加入集群的服务器都已这台服务器为基准。以后加入的就不需要进行设置
 					    
 loose-group_replication_group_name = 850ce522-a85e-11e9-8ea3-48df3749e199				  
-loose-group_replication_local_address = 192.168.148.41:33061					       
-loose-group_replication_group_seeds = 192.168.148.41:33061,192.168.148.42:33072,192.168.148.39:33083					       
+#loose-group_replication_local_address = 192.168.148.41:33061					       
+#loose-group_replication_group_seeds = 192.168.148.41:33061,192.168.148.42:33072,192.168.148.39:33083					       
 loose-group_replication_single_primary_mode = ON	
 loose-group_replication_exit_state_action = OFFLINE_MODE
 loose-group_replication_transaction_size_limit = 150000000 ###默认143M事务大小，最大值2147483647（大约2G），当此系统变量设置为0时，该组接受的事务大小没有限制。
