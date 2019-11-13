@@ -73,7 +73,7 @@ do
 	fi
 done
 
-/usr/local/mysql/bin/mysql -h127.0.0.1 -u"$dba_user" -p"$dba_passwd" -P"$master_port" --connect-expired-password -e "CHANGE MASTER TO MASTER_HOST='$master_ip',MASTER_USER='repl',MASTER_PASSWORD='sysrepl',MASTER_PORT=$master_port,MASTER_AUTO_POSITION = 1,MASTER_CONNECT_RETRY=10; START SLAVE;"
+/usr/local/mysql/bin/mysql -h127.0.0.1 -u"$dba_user" -p"$dba_passwd" -P"$master_port" --connect-expired-password -e "CHANGE MASTER TO MASTER_HOST='$master_ip',MASTER_USER='$repl_user',MASTER_PASSWORD='$repl_passwd',MASTER_PORT=$master_port,MASTER_AUTO_POSITION = 1,MASTER_CONNECT_RETRY=10; START SLAVE;"
 
 	echo "MySQL主从复制同步已经初始化完毕。"
 	exit 0
