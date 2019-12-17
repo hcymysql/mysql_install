@@ -42,6 +42,7 @@ lower_case_table_names  =  1
 log-bin  =  /data/mysql/test/binlog/mysql-bin
 binlog_format = ROW
 binlog_checksum = NONE
+binlog_transaction_dependency_tracking = WRITESET
 sync_binlog      =   1
 gtid_mode = on
 enforce_gtid_consistency = on
