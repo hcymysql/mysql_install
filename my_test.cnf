@@ -127,6 +127,7 @@ low_priority_updates=1
 myisam_recover_options=BACKUP,FORCE
 
 ######### InnoDB #############
+innodb_autoinc_lock_mode = 2
 innodb_numa_interleave = 1
 innodb_sort_buffer_size = 32M
 innodb_rollback_on_timeout = 1
