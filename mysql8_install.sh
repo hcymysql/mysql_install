@@ -9,8 +9,8 @@ useradd zabbix
 sleep 2
 
 ######配置参数######
-mysql8_version=mysql-8.0.18-linux-glibc2.12-x86_64.tar.xz
-mysql8_version_dir=mysql-8.0.18-linux-glibc2.12-x86_64
+mysql8_version=mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz
+mysql8_version_dir=mysql-8.0.20-linux-glibc2.12-x86_64
 
 ######同步复制用户######
 repl_user=repl
