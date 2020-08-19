@@ -78,6 +78,7 @@ loose-group_replication_group_name = 850ce522-a85e-11e9-8ea3-48df3749e199
 loose-group_replication_single_primary_mode = ON	
 loose-group_replication_exit_state_action = OFFLINE_MODE
 loose-group_replication_transaction_size_limit = 150000000 ###默认143M事务大小，最大值2147483647（大约2G），当此系统变量设置为0时，该组接受的事务大小没有限制。
+loose-group_replication_enforce_update_everywhere_checks = OFF ###在单主模式下设置为OFF，多主模式下设置为ON。
 								
 offline_mode = ON
 
