@@ -166,7 +166,7 @@ then
 	echo ""
 	echo "初始化MySQL数据目录......"
 	echo ""
-	bin/mysqld --defaults-file=/etc/my_$dbname.cnf --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql/$dbname/data
+	bin/mysqld --defaults-file=/etc/my_$dbname.cnf --initialize --lower-case-table-names=1 --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql/$dbname/data
 	sleep 2
 	bin/mysqld_safe --defaults-file=/etc/my_$dbname.cnf --user=mysql &
 fi
