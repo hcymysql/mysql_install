@@ -20,6 +20,7 @@ skip-name-resolve
 ##init_connect = 'SET global sql_mode = ""'
 sql_mode = ''
 default_authentication_plugin = mysql_native_password
+activate_all_roles_on_login = 1
 
 ### Percona ###
 #extra_port = 13306
