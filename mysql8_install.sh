@@ -9,8 +9,8 @@ useradd zabbix
 sleep 2
 
 ######配置参数######
-mysql8_version=mysql-8.0.21-linux-glibc2.12-x86_64.tar.xz
-mysql8_version_dir=mysql-8.0.21-linux-glibc2.12-x86_64
+mysql8_version=mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
+mysql8_version_dir=mysql-8.0.28-linux-glibc2.12-x86_64
 
 ######同步复制用户######
 repl_user=repl
@@ -55,7 +55,7 @@ secondary2_port=33063
 local_ip=192.168.137.11
 local_port=33061
 
-###############################################
+################################以下代码不用修改################################
 if [ "$1" = "repl" ]
 then
 while true
