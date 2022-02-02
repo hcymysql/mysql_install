@@ -12,11 +12,12 @@ mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz
 ------------------------------------------------------------------------------------
 # Centos8 注意事项
 
-shell> yum install jemalloc
+## shell> yum install jemalloc -y
 
-jemalloc库文件名字已经变更，需要建立一个软连接
+内存管理器jemalloc库文件名字已经变更，需要建立一个软连接
 
-shell> ln -s /usr/lib64/libjemalloc.so.2 /usr/lib64/libjemalloc.so
+## shell> ln -s /usr/lib64/libjemalloc.so.2 /usr/lib64/libjemalloc.so
+
 ------------------------------------------------------------------------------------
 
 1）安装并启动mysql进程（主和从库都执行）
