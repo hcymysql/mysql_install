@@ -194,12 +194,12 @@ fi
 
 ###更改root账号随机密码
 random_passwd=`grep 'temporary password' $DATA_DIR/log/error.log | awk -F 'root@localhost: ' '{print $2}'`
-/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$random_passwd" --connect-expired-password -e "set sql_log_bin=0;alter user root@'localhost' identified by '$root_passwd';" 
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$random_passwd" --connect-expired-password -e "alter user root@'localhost' identified by '$root_passwd';" 
 
 echo "root账号随机密码更改完毕。"
 
 ###创建同步账号和管理员账号
-/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock --connect-expired-password -p"$root_passwd" -e "set sql_log_bin=0;create user '$repl_user'@'%' IDENTIFIED BY '$repl_passwd'; GRANT REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO '$repl_user'@'%'; create user '$dba_user'@'%' IDENTIFIED BY '$dba_passwd'; GRANT ALL on *.* to '$dba_user'@'%' WITH GRANT OPTION;"
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$root_passwd" -e "set sql_log_bin=0;create user '$repl_user'@'%' IDENTIFIED BY '$repl_passwd'; GRANT REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO '$repl_user'@'%'; create user '$dba_user'@'%' IDENTIFIED BY '$dba_passwd'; GRANT ALL on *.* to '$dba_user'@'%' WITH GRANT OPTION;"
 
 sed -i -r "s/(PATH=)/\1\/usr\/local\/mysql\/bin:/" /root/.bash_profile
 source /root/.bash_profile
@@ -207,8 +207,12 @@ source /root/.bash_profile
 echo "MySQL账号初始化完毕。"
 
 ###安装clone插件
-/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock --connect-expired-password -p"$root_passwd" -e "set sql_log_bin=0;INSTALL PLUGIN CLONE SONAME 'mysql_clone.so'; CREATE USER '$clone_user'@'%' IDENTIFIED BY '$clone_passwd';GRANT BACKUP_ADMIN,CLONE_ADMIN ON *.* TO '$clone_user'@'%';"
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$root_passwd" -e "set sql_log_bin=0;INSTALL PLUGIN CLONE SONAME 'mysql_clone.so'; CREATE USER '$clone_user'@'%' IDENTIFIED BY '$clone_passwd';GRANT BACKUP_ADMIN,CLONE_ADMIN ON *.* TO '$clone_user'@'%';"
 
 echo ""
 echo "clone克隆插件安装完毕。"
+
+### 最后一步清空binlog文件，恢复起始文件mysql-bin.000001和Position位置号153 
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock  -p"$root_passwd" -e "reset master;"
+
 
