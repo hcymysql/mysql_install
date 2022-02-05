@@ -1,7 +1,7 @@
 # mysql_install
 MySQL8.0 自动安装脚本 
 
-mysql8_install.sh
+mysql8_install.sh（执行前修改一下脚本里的配置参数，改成你自己的）
 
 my_test.cnf
 
