@@ -27,6 +27,7 @@ shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.28-linux-gli
 #/bin/bash  mysql8_install.sh
 
 注：my.cnf配置文件默认在/etc/目录下，文件名是以你的数据库名命名，例my_test.cnf，mysql.sock在/tmp目录下。
+
     数据存放在/data/mysql/目录下。
 
 2）配置主从复制（从库执行）
