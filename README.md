@@ -3,7 +3,7 @@ MySQL8.0 自动安装脚本
 
 mysql8_install.sh（执行前修改一下脚本里的配置参数，改成你自己的）
 
-my_test.cnf
+my_test.cnf（这个是模板文件，基本上不用改，mysql8_install.sh脚本执行的时候会自动替换里面的port，server_id，innodb_buffer_pool_size等）
 
 mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
 
