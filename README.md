@@ -41,3 +41,4 @@ shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.28-linux-gli
 ![image](https://raw.githubusercontent.com/hcymysql/mysql_install/master/mgr.png)
 
 注：配置成功后，会在data数据目录下生成mysqld-auto.cnf配置文件。
+
