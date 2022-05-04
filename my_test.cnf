@@ -14,6 +14,7 @@ user            =  mysql
 basedir		=  /usr/local/mysql
 datadir		=  /data/mysql/test/data
 tmpdir		=  /data/mysql/test/tmp
+secure_file_priv =  /data/mysql/test/tmp
 socket		=  /tmp/mysql_test.sock
 skip-external-locking
 skip-name-resolve
