@@ -9,9 +9,10 @@ useradd zabbix
 sleep 2
 
 ######配置参数######
-mysql8_version=mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
-mysql8_version_dir=mysql-8.0.28-linux-glibc2.12-x86_64
+mysql8_version=mysql-8.0.29-linux-glibc2.12-x86_64.tar.xz
+mysql8_version_dir=mysql-8.0.29-linux-glibc2.12-x86_64
 
+################################主从复制配置################################
 ######同步复制用户######
 repl_user=repl
 repl_passwd=sysrepl
@@ -31,28 +32,28 @@ clone_user=clone_user
 clone_passwd=123456
 #######################
 
+################################mgr组复制配置################################
 
 ######修改hosts文件######
 cat << EOF >> /etc/hosts
 
-192.168.137.11		mgr1
-192.168.137.12		mgr2
-192.168.137.13		mgr3
+192.168.71.11   mgr1
+192.168.71.12   mgr2
+192.168.71.13   mgr3
 
 EOF
 #######################
 
-######mgr配置######
 mysql_port=3306
-primary_ip=192.168.137.11
-secondary1_ip=192.168.137.12
-secondary2_ip=192.168.137.13
+primary_ip=192.168.71.11
+secondary1_ip=192.168.71.12
+secondary2_ip=192.168.71.13
 
 primary_port=33061
 secondary1_port=33062
 secondary2_port=33063
 
-local_ip=192.168.137.11
+local_ip=192.168.71.11
 local_port=33061
 
 ################################以下代码不用修改################################
@@ -176,10 +177,15 @@ do
 	 netstat -ntlp | grep $dbport
 	 if [ $? -eq 1 ]
 	 then
-		echo "MySQL启动中，稍等......"
-		sleep 5
-		continue
+        echo "MySQL启动中，稍等......"
+        sleep 5
+        continue
 	 else
+        if [ ! -e "/tmp/mysql_${dbname}.sock" ];then
+            echo "MySQL启动中，稍等......"
+            sleep 5
+            continue
+        fi
 		break
 	 fi
 done
@@ -190,13 +196,28 @@ then
         echo "MySQL安装完毕。"
 else
 	echo "MySQL安装失败。"
+        exit 1
 fi
 
 ###更改root账号随机密码
 random_passwd=`grep 'temporary password' $DATA_DIR/log/error.log | awk -F 'root@localhost: ' '{print $2}'`
-/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$random_passwd" --connect-expired-password -e "alter user root@'localhost' identified by '$root_passwd';" 
 
-echo "root账号随机密码更改完毕。"
+/usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$random_passwd" --connect-expired-password -e "alter user root@'localhost' identified by '$root_passwd';" 
+if [ $? -eq 0 ]
+then
+    echo "root账号随机密码更改完毕。"
+else
+    echo "密码更改失败，再次重试更改。"
+    sleep 5
+    /usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$random_passwd" --connect-expired-password -e "alter user root@'localhost'identified by '$root_passwd';"
+    if [ $? -eq 0 ]
+    then
+       echo "root账号随机密码更改完毕。"
+    else
+       echo "密码更改失败"
+       exit 1
+    fi
+fi
 
 ###创建同步账号和管理员账号
 /usr/local/mysql/bin/mysql -S /tmp/mysql_$dbname.sock -p"$root_passwd" -e "set sql_log_bin=0;create user '$repl_user'@'%' IDENTIFIED BY '$repl_passwd'; GRANT REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO '$repl_user'@'%'; create user '$dba_user'@'%' IDENTIFIED BY '$dba_passwd'; GRANT ALL on *.* to '$dba_user'@'%' WITH GRANT OPTION;"
