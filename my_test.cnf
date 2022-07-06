@@ -18,6 +18,7 @@ secure_file_priv =  /data/mysql/test/tmp
 socket		=  /tmp/mysql_test.sock
 skip-external-locking
 skip-name-resolve
+skip-ssl
 ##init_connect = 'SET global sql_mode = ""'
 sql_mode = ''
 default_authentication_plugin = mysql_native_password
