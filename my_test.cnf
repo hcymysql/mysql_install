@@ -151,6 +151,7 @@ innodb_sync_spin_loops = 40
 innodb_max_dirty_pages_pct = 95
 innodb_ddl_threads = 16
 innodb_ddl_buffer_size = 1G
+innodb_online_alter_log_max_size = 1G
 innodb_parallel_read_threads = 32
 innodb_thread_concurrency = 0
 innodb_thread_sleep_delay = 500
