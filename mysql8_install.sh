@@ -44,17 +44,17 @@ cat << EOF >> /etc/hosts
 EOF
 #######################
 
-mysql_port=3306
-primary_ip=192.168.71.11
-secondary1_ip=192.168.71.12
-secondary2_ip=192.168.71.13
+mysql_port=3306                 # 数据库实例对外请求端口
+primary_ip=192.168.71.11        # 每个mgr节点IP
+secondary1_ip=192.168.71.12     # 每个mgr节点IP
+secondary2_ip=192.168.71.13     # 每个mgr节点IP
 
-primary_port=33061
-secondary1_port=33062
-secondary2_port=33063
+primary_port=33061        # mgr primary节点通讯端口
+secondary1_port=33062     # mgr secondary1节点通讯端口
+secondary2_port=33063     # mgr secondary2节点通讯端口
 
-local_ip=192.168.71.11
-local_port=33061
+local_ip=192.168.71.11    # 每个mgr节点IP不相同
+local_port=33061          # 每个mgr节点通讯端口port不相同
 
 ################################以下代码不用修改################################
 if [ "$1" = "repl" ]
