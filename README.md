@@ -1,4 +1,4 @@
-# mysql_install
+# mysql_install - 适用于生产环境单实例快速部署
 MySQL8.0 自动安装脚本 
 
 mysql8_install.sh（执行前修改一下脚本里的配置参数，改成你自己的）
