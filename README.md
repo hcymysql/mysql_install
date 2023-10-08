@@ -7,7 +7,7 @@ my_test.cnf（这个是模板文件，基本上不用改，mysql8_install.sh脚�
 
 mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
 
-shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
+```shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz```
 
 三个文件放在同一个目录下，例如/root/soft/
 
