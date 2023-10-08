@@ -24,7 +24,7 @@ mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
 
 1）安装并启动mysql进程（主和从库都执行）
 
-```#/bin/bash  mysql8_install.sh```
+```shell> /bin/bash  mysql8_install.sh```
 
 注：my.cnf配置文件默认在/etc/目录下，文件名是以你的数据库名命名，例my_test.cnf，mysql.sock在/tmp目录下。
 
@@ -32,13 +32,13 @@ mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
 
 2）配置主从复制（从库执行）
 
-```#/bin/bash  mysql8_install.sh  repl```
+```shell> /bin/bash  mysql8_install.sh  repl```
 
 3）配置组复制（先在Primary节点上执行，再到Secondary节点上执行）
 
 注：先把3个节点MySQL实例启动后再开始搭建mgr，同时修改脚本里的ip地址和端口和hosts对应的主机名和地址
 
-```#/bin/bash  mysql8_install.sh  mgr```
+```shell> /bin/bash  mysql8_install.sh  mgr```
 
 ![image](https://raw.githubusercontent.com/hcymysql/mysql_install/master/mgr.png)
 
