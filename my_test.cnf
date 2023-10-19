@@ -44,6 +44,8 @@ lower_case_table_names  =  1
 ###### binlog ######
 log-bin  =  /data/mysql/test/binlog/mysql-bin
 binlog_format = ROW
+binlog_row_image = FULL
+binlog_row_metadata = FULL
 binlog_checksum = NONE
 binlog_transaction_dependency_tracking = WRITESET
 sync_binlog      =   1
