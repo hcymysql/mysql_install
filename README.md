@@ -5,9 +5,9 @@ mysql8_install.sh（执行前修改一下脚本里的配置参数，改成你自
 
 my_test.cnf（这个是模板文件，基本上不用改，mysql8_install.sh脚本执行的时候会自动替换里面的port，server_id，innodb_buffer_pool_size等）
 
-mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
+mysql-8.0.32-linux-glibc2.12-x86_64.tar.xz
 
-```shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz```
+```shell> wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.32-linux-glibc2.12-x86_64.tar.xz```
 
 三个文件放在同一个目录下，例如/root/soft/
 
