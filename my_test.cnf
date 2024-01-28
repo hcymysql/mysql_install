@@ -190,8 +190,6 @@ max_allowed_packet = 128M
 
 [mysql]
 no-auto-rehash
-#prompt=(\\u@\\h) [\\d]>\\_
-prompt=(\\u@\\h) [\\d]>\\_
 
 [myisamchk]
 key_buffer_size = 64M
