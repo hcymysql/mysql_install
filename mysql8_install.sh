@@ -87,7 +87,7 @@ then
 
 while true
 do
-	read -t 30 -p "是Primary吗？是请输入yes，否输入no:  " is_primary
+	read -t 30 -e -p "是Primary吗？是请输入yes，否输入no:  " is_primary
 	if [[ -z $is_primary ]]
 	then
 		continue
@@ -140,10 +140,10 @@ fi
 
 while true
 do
-	read -t 30 -p "输入你的数据库名:  " dbname
-	read -t 30 -p "输入你的数据库端口号:  " dbport
-	read -t 30 -p "输入MySQL serverId:  " serverId
-	read -t 30 -p "输入innodb_buffer_pool_size大小，单位G:  " innodb_bp_size
+	read -t 30 -e -p "输入你的数据库名:  " dbname
+	read -t 30 -e -p "输入你的数据库端口号:  " dbport
+	read -t 30 -e -p "输入MySQL serverId:  " serverId
+	read -t 30 -e -p "输入innodb_buffer_pool_size大小，单位G:  " innodb_bp_size
 	if [[ -z $dbname || -z $dbport || -z $serverId || -z $innodb_bp_size ]]
 	then
 		continue
