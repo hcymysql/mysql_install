@@ -62,8 +62,8 @@ if [ "$1" = "repl" ]
 then
 while true
 do
-	read -t 30 -p "输入你的主库IP:  " master_ip
-	read -t 30 -p "输入你的主库端口号:  " master_port
+	read -t 30 -e -p "输入你的主库IP:  " master_ip
+	read -t 30 -e -p "输入你的主库端口号:  " master_port
 	if [[ -z $master_ip || -z $master_port ]]
 	then
 		continue
