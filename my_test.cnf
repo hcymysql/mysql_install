@@ -30,7 +30,8 @@ activate_all_roles_on_login = 1
 
 ###skip-networking
 default-storage-engine = INNODB
-character-set-server = utf8
+character-set-server =  utf8
+collation-server     =  utf8_unicode_ci
 wait_timeout  =  3600
 connect_timeout  =  20
 interactive_timeout  =  3600
